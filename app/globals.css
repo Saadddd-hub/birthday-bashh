@@ -1,26 +1,415 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ============================================================
+   DESIGN TOKENS — Birthday Website
+   ============================================================ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand Colors */
+  --color-pink-soft: #F9A8D4;
+  --color-lavender: #C4B5FD;
+  --color-purple-deep: #1E1B4B;
+  --color-purple-mid: #4C1D95;
+  --color-purple-bright: #7C3AED;
+  --color-rose: #EC4899;
+  --color-cream: #FEF7F0;
+  --color-white: #FFFFFF;
+
+  /* Spacing */
+  --spacing-section: 6rem;
+
+  /* Border radius */
+  --radius-card: 1.5rem;
+  --radius-pill: 9999px;
+
+  /* Fonts */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-handwritten: "Caveat", cursive, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   GLOBAL RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0a0518;
+  color: #ffffff;
+  font-family: "Inter", system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ============================================================
+   SCROLLBAR STYLING
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1E1B4B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #F9A8D4, #C4B5FD);
+  border-radius: 999px;
+}
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+::selection {
+  background: rgba(249, 168, 212, 0.4);
+  color: #ffffff;
+}
+
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+
+/* Twinkling stars */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Floating hearts */
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg) scale(0.5);
+  }
+  10% { opacity: 1; }
+  90% { opacity: 0.7; }
+  100% {
+    opacity: 0;
+    transform: translateY(-110vh) rotate(360deg) scale(1);
+  }
+}
+
+/* Gentle bob / float for decorative elements */
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+}
+
+/* Glow pulse for borders/shadows */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(249, 168, 212, 0.4),
+                0 0 40px rgba(196, 181, 253, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(249, 168, 212, 0.8),
+                0 0 80px rgba(196, 181, 253, 0.5);
+  }
+}
+
+/* Glow pulse for romantic text */
+@keyframes text-glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 25px rgba(249, 168, 212, 0.5),
+                 0 0 50px rgba(196, 181, 253, 0.35);
+  }
+  50% {
+    text-shadow: 0 0 45px rgba(249, 168, 212, 0.9),
+                 0 0 90px rgba(196, 181, 253, 0.65);
+  }
+}
+
+/* Shimmer sweep */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Confetti fall */
+@keyframes confetti-fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* Flame flicker */
+@keyframes flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1) rotate(-1deg); opacity: 1; }
+  25% { transform: scaleY(1.1) scaleX(0.9) rotate(1deg); opacity: 0.9; }
+  50% { transform: scaleY(0.95) scaleX(1.05) rotate(-2deg); opacity: 1; }
+  75% { transform: scaleY(1.05) scaleX(0.95) rotate(2deg); opacity: 0.85; }
+}
+
+/* Heart burst */
+@keyframes heart-burst {
+  0% { transform: scale(0) rotate(0deg); opacity: 1; }
+  50% { opacity: 1; }
+  100% { transform: scale(3) rotate(45deg); opacity: 0; }
+}
+
+/* Firework pop */
+@keyframes firework {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* Loading spinner */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Slide in from left */
+@keyframes slide-in-left {
+  from { transform: translateX(-60px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Fade in up */
+@keyframes fade-in-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.5rem;
+}
+
+/* Glow border */
+.glow-border {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Float animation */
+.float-bob {
+  animation: float-bob 4s ease-in-out infinite;
+}
+
+/* Shimmer text */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #F9A8D4 0%,
+    #ffffff 25%,
+    #C4B5FD 50%,
+    #ffffff 75%,
+    #F9A8D4 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #F9A8D4, #C4B5FD, #F9A8D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section container */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Display font */
+.font-display {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+/* Perspective for flip cards */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Candle flame */
+.candle-flame {
+  animation: flicker 0.3s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+
+/* Stars */
+.star-twinkle {
+  animation: twinkle var(--duration, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  margin: 0 auto;
+  max-width: 800px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(249, 168, 212, 0.2),
+    rgba(196, 181, 253, 0.2),
+    transparent
+  );
+}
+
+/* Accent input range */
+input[type="range"] {
+  accent-color: #F9A8D4;
+  cursor: pointer;
+}
+
+/* ============================================================
+   CSS ANIMATION UTILITIES (replaces framer-motion)
+   ============================================================ */
+
+/* --- Entrance animations --- */
+@keyframes anim-fade-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes anim-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes anim-scale-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes anim-slide-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes anim-scale-pop {
+  0%   { opacity: 0; transform: scale(0.5) rotate(-4deg); }
+  70%  { transform: scale(1.05) rotate(1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Visible-only classes — applied by JS once in-view */
+.in-view-fade-up  { animation: anim-fade-up  0.65s ease-out both; }
+.in-view-fade-in  { animation: anim-fade-in  0.55s ease-out both; }
+.in-view-scale-in { animation: anim-scale-in 0.55s ease-out both; }
+.in-view-slide-l  { animation: anim-slide-left 0.6s ease-out both; }
+.in-view-pop      { animation: anim-scale-pop  0.6s ease-out both; }
+
+/* Mount animations (no IntersectionObserver needed) */
+.mount-fade-up  { animation: anim-fade-up  0.7s ease-out both; }
+.mount-fade-in  { animation: anim-fade-in  0.6s ease-out both; }
+.mount-scale-in { animation: anim-scale-in 0.5s ease-out both; }
+
+/* --- Delay utilities (d-N = N * 100ms) --- */
+.d-0  { animation-delay: 0s;    }
+.d-1  { animation-delay: 0.1s;  }
+.d-2  { animation-delay: 0.2s;  }
+.d-3  { animation-delay: 0.3s;  }
+.d-4  { animation-delay: 0.4s;  }
+.d-5  { animation-delay: 0.5s;  }
+.d-6  { animation-delay: 0.6s;  }
+.d-7  { animation-delay: 0.7s;  }
+.d-8  { animation-delay: 0.8s;  }
+.d-9  { animation-delay: 0.9s;  }
+.d-10 { animation-delay: 1.0s;  }
+.d-12 { animation-delay: 1.2s;  }
+.d-15 { animation-delay: 1.5s;  }
+.d-18 { animation-delay: 1.8s;  }
+.d-20 { animation-delay: 2.0s;  }
+
+/* --- Hover card utilities --- */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-7px) scale(1.02);
+}
+
+.btn-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.btn-hover:hover  { transform: scale(1.05); }
+.btn-hover:active { transform: scale(0.97); }
+
+/* --- Modal fade overlay --- */
+.modal-overlay {
+  transition: opacity 0.3s ease;
+}
+.modal-content {
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(.34,1.56,.64,1);
+}
+.modal-hidden .modal-overlay { opacity: 0; pointer-events: none; }
+.modal-hidden .modal-content { opacity: 0; transform: scale(0.88) translateY(20px); pointer-events: none; }
+.modal-visible .modal-overlay { opacity: 1; }
+.modal-visible .modal-content { opacity: 1; transform: scale(1) translateY(0); }
+
+/* Continuous pulse glow on hero button */
+@keyframes btn-glow {
+  0%,100% { box-shadow: 0 0 40px rgba(236,72,153,0.4), 0 0 80px rgba(139,92,246,0.2); }
+  50%      { box-shadow: 0 0 60px rgba(236,72,153,0.7), 0 0 120px rgba(139,92,246,0.4); }
+}
+.btn-glow { animation: btn-glow 2.5s ease-in-out infinite; }
+
+/* Sliding arrow nudge */
+@keyframes nudge-right {
+  0%,100% { transform: translateX(0); }
+  50%      { transform: translateX(6px); }
+}
+.nudge-right { animation: nudge-right 1.5s ease-in-out infinite; }
+
+/* Spinning vinyl */
+@keyframes spin-vinyl {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.spin-vinyl { animation: spin-vinyl 3s linear infinite; }
+
+/* EQ bars */
+@keyframes eq-bar {
+  0%,100% { transform: scaleY(0.3); }
+  50%      { transform: scaleY(1); }
+}
+
+.font-handwritten {
+  font-family: var(--font-handwritten), cursive, sans-serif;
+}
+
+
