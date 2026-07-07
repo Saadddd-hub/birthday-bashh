@@ -125,7 +125,7 @@ export default function MiniGame() {
         />
 
         {/* Center-aligned Game Wrapper */}
-        <div className="flex flex-col items-center justify-center gap-8 max-w-2xl mx-auto px-4">
+        <div className="flex flex-col items-center justify-center gap-8 max-w-2xl mx-auto mt-16 mb-20 px-4">
           
           {/* Top Info HUD */}
           {phase === "playing" && (
@@ -187,7 +187,7 @@ export default function MiniGame() {
                 </div>
                 <button
                   onClick={startGame}
-                  className="px-8 py-3.5 rounded-full font-bold text-white btn-hover text-sm tracking-wide"
+                  className="px-10 py-4.5 rounded-full font-bold text-white btn-hover text-sm tracking-wide"
                   style={{
                     background: "linear-gradient(135deg, #EC4899, #8B5CF6)",
                     boxShadow: "0 4px 15px rgba(236,72,153,0.3)",
@@ -258,7 +258,7 @@ export default function MiniGame() {
                 </p>
                 <button
                   onClick={startGame}
-                  className="mt-2 px-8 py-3 rounded-full font-semibold text-white btn-hover text-sm"
+                  className="mt-2 px-10 py-4 rounded-full font-semibold text-white btn-hover text-sm"
                   style={{
                     background: "linear-gradient(135deg, #EC4899, #8B5CF6)",
                     cursor: "pointer",

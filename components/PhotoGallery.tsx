@@ -42,7 +42,7 @@ export default function PhotoGallery() {
         />
 
         {/* Responsive Grid with Centered Content (Restored) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto justify-center place-items-center">
           {gallery.map((photo, i) => (
             <div
               key={photo.id}

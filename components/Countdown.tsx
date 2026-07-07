@@ -12,7 +12,17 @@ interface TimeLeft {
 }
 
 function calculateTimeLeft(target: string): TimeLeft {
-  const diff = new Date(target).getTime() - Date.now();
+  const parts = target.match(/\d+/g);
+  if (!parts) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  const y = parseInt(parts[0], 10);
+  const m = parseInt(parts[1], 10) - 1; // 0-indexed month
+  const d = parseInt(parts[2], 10);
+  const h = parts[3] ? parseInt(parts[3], 10) : 0;
+  const mi = parts[4] ? parseInt(parts[4], 10) : 0;
+  const s = parts[5] ? parseInt(parts[5], 10) : 0;
+
+  const targetTime = new Date(y, m, d, h, mi, s).getTime();
+  const diff = targetTime - Date.now();
   if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   return {
     days: Math.floor(diff / (1000 * 60 * 60 * 24)),

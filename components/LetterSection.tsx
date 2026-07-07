@@ -27,10 +27,10 @@ export default function LetterSection() {
         />
 
         {/* Centered Envelope Card */}
-        <div className="max-w-md mx-auto mt-12 px-4 flex justify-center">
+        <div className="max-w-xl mx-auto mt-20 mb-20 px-4 flex justify-center">
           <button
             onClick={() => setIsOpen(true)}
-            className="w-full text-left group relative overflow-hidden rounded-2xl p-8 card-hover"
+            className="w-full text-left group relative overflow-hidden rounded-2xl p-10 sm:p-14 card-hover"
             style={{
               background: "linear-gradient(135deg, rgba(30,27,75,0.85), rgba(76,29,149,0.55))",
               border: "1px solid rgba(249,168,212,0.3)",
@@ -68,7 +68,7 @@ export default function LetterSection() {
                 {letter?.occasion || "A Handwritten Letter For You"}
               </h3>
               <div
-                className="mt-6 inline-flex items-center gap-2 text-sm text-pink-300 border border-pink-400/20 px-5 py-2.5 rounded-full bg-pink-500/10 group-hover:bg-pink-500/20"
+                className="mt-6 inline-flex items-center gap-2 text-sm text-pink-300 border border-pink-400/20 px-7 py-3.5 rounded-full bg-pink-500/10 group-hover:bg-pink-500/20"
                 style={{ transition: "all 0.3s ease" }}
               >
                 <span>Open Envelope</span>
@@ -95,7 +95,7 @@ export default function LetterSection() {
       >
         <div
           style={{
-            maxWidth: 520,
+            maxWidth: 680,
             width: "100%",
             transform: isOpen ? "scale(1) rotate(0deg) translateY(0)" : "scale(0.8) rotate(-8deg) translateY(40px)",
             opacity: isOpen ? 1 : 0,
@@ -118,7 +118,7 @@ export default function LetterSection() {
               />
 
               {/* Paper Body */}
-              <div className="px-8 md:px-12 py-10">
+              <div className="px-10 md:px-16 py-14">
                 <div className="text-right text-xs md:text-sm text-gray-400 font-sans mb-6 tracking-wide select-none">
                   {new Date().toLocaleDateString("en-US", {
                     month: "long",

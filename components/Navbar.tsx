@@ -53,6 +53,33 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Autoplay/Play on first page interaction (click/tap)
+  useEffect(() => {
+    const startAudio = () => {
+      const audio = audioRef.current;
+      if (audio && !playing) {
+        audio.play()
+          .then(() => {
+            setPlaying(true);
+            removeListeners();
+          })
+          .catch(() => {});
+      }
+    };
+
+    const removeListeners = () => {
+      document.removeEventListener("click", startAudio);
+      document.removeEventListener("touchstart", startAudio);
+    };
+
+    document.addEventListener("click", startAudio);
+    document.addEventListener("touchstart", startAudio);
+
+    return () => {
+      removeListeners();
+    };
+  }, [playing]);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -112,7 +139,7 @@ export default function Navbar() {
 
   return (
     <>
-      <audio ref={audioRef} src={music.src} preload="metadata" />
+      <audio ref={audioRef} src={music.src} preload="none" />
 
       {/* Desktop Unified Header */}
       <nav
@@ -147,7 +174,7 @@ export default function Navbar() {
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className="relative px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 hover:text-pink-300"
+                className="relative px-4 py-2 text-xs font-semibold rounded-full transition-all duration-300 hover:text-pink-300"
                 style={{
                   color: active === link.href ? "#F9A8D4" : "rgba(255,255,255,0.7)",
                   background: active === link.href ? "rgba(249,168,212,0.12)" : "transparent",
@@ -211,7 +238,7 @@ export default function Navbar() {
               {/* Play / Pause */}
               <button
                 onClick={togglePlay}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-xs bg-pink-500/20 text-pink-300 border border-pink-400/30 btn-hover"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-xs bg-pink-500/20 text-pink-300 border border-pink-400/30 btn-hover"
                 style={{ cursor: "pointer" }}
                 aria-label={playing ? "Pause" : "Play"}
               >
@@ -220,7 +247,7 @@ export default function Navbar() {
               {/* Mute / Unmute */}
               <button
                 onClick={toggleMute}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-xs bg-white/5 text-white/70 border border-white/10 btn-hover"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-xs bg-white/5 text-white/70 border border-white/10 btn-hover"
                 style={{ cursor: "pointer" }}
                 aria-label={isMuted ? "Unmute" : "Mute"}
               >
@@ -315,7 +342,7 @@ export default function Navbar() {
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="px-2 py-3 rounded-xl text-[13px] font-bold text-center"
+              className="px-3 py-3 rounded-xl text-[13px] font-bold text-center"
               style={{
                 background: active === link.href ? "rgba(249, 168, 212, 0.2)" : "rgba(255,255,255,0.04)",
                 color: active === link.href ? "#F9A8D4" : "rgba(255,255,255,0.7)",
@@ -359,14 +386,14 @@ export default function Navbar() {
           <div className="flex gap-2">
             <button
               onClick={togglePlay}
-              className="px-4 py-1.5 rounded-full text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-400/30"
+              className="px-5 py-2 rounded-full text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-400/30"
               style={{ cursor: "pointer" }}
             >
               {playing ? "Pause" : "Play"}
             </button>
             <button
               onClick={toggleMute}
-              className="p-2 rounded-full bg-white/5 text-white/70 text-xs border border-white/10"
+              className="p-2.5 rounded-full bg-white/5 text-white/70 text-xs border border-white/10"
               style={{ cursor: "pointer" }}
             >
               {isMuted ? "🔇" : "🔊"}

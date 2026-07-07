@@ -212,7 +212,7 @@ export default function FinalSurprise() {
           {!showFinal ? (
             <button
               onClick={handleLastSurprise}
-              className="mt-4 px-10 py-5 rounded-full font-semibold text-lg text-white btn-hover btn-glow mount-scale-in d-8"
+              className="mt-4 px-12 py-6 rounded-full font-semibold text-lg text-white btn-hover btn-glow mount-scale-in d-8"
               style={{
                 background: "linear-gradient(135deg, #EC4899, #8B5CF6)",
                 cursor: "pointer",

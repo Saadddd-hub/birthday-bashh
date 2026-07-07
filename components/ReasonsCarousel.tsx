@@ -35,10 +35,11 @@ export default function ReasonsCarousel() {
     });
   };
 
+  // Linear carousel indices: hide prev card at index 0, hide next card at index 9
   const visibleIndices = [
-    (currentIndex - 1 + reasons.length) % reasons.length,
+    currentIndex > 0 ? currentIndex - 1 : -1,
     currentIndex,
-    (currentIndex + 1) % reasons.length,
+    currentIndex < reasons.length - 1 ? currentIndex + 1 : -1,
   ];
 
   return (
@@ -57,34 +58,44 @@ export default function ReasonsCarousel() {
           emoji="💫"
         />
 
-        {/* Swipeable / Clickable flip deck */}
+        {/* Unified Mobile + Desktop deck */}
         <div className="relative flex items-center justify-center gap-4 md:gap-8 h-80 md:h-96 max-w-4xl mx-auto">
           {visibleIndices.map((absIdx, pos) => {
             const isCenter = pos === 1;
+
+            if (absIdx === -1) {
+              return (
+                <div
+                  key={`empty-${pos}`}
+                  className="hidden sm:block opacity-0 pointer-events-none"
+                  style={{
+                    width: "220px",
+                    height: "220px",
+                  }}
+                />
+              );
+            }
+
             return (
               <div
                 key={absIdx}
                 onClick={() => (isCenter ? toggleFlip(absIdx) : pos === 0 ? prev() : next())}
                 style={{
-                  width: isCenter ? "320px" : "220px",
-                  height: isCenter ? "280px" : "220px",
                   perspective: "1000px",
-                  opacity: isCenter ? 1 : 0.4,
-                  transform: isCenter ? "scale(1)" : "scale(0.85)",
-                  filter: isCenter ? "none" : "blur(1.5px)",
                   cursor: "pointer",
                   transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
                   zIndex: isCenter ? 2 : 1,
                 }}
-                className="relative hidden sm:block"
+                className={`${
+                  isCenter
+                    ? "w-[290px] h-[260px] sm:w-[320px] sm:h-[280px] opacity-100 scale-100 filter-none"
+                    : "hidden sm:block w-[220px] h-[220px] opacity-40 scale-85 blur-[1.5px]"
+                } relative`}
               >
                 {/* 3D Flip Card */}
                 <div
+                  className="relative w-full h-full preserve-3d"
                   style={{
-                    position: "relative",
-                    width: "100%",
-                    height: "100%",
-                    transformStyle: "preserve-3d",
                     transform: flipped[absIdx] ? "rotateY(180deg)" : "rotateY(0deg)",
                     transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
                   }}
@@ -108,12 +119,13 @@ export default function ReasonsCarousel() {
                     >
                       {REASON_EMOJIS[absIdx % REASON_EMOJIS.length]}
                     </div>
-                    <span className="font-display text-2xl font-bold gradient-text mb-1">
+                    <span className="font-display text-2xl font-bold gradient-text mb-1 select-none">
                       Reason #{absIdx + 1}
                     </span>
                     {isCenter && (
                       <p className="text-pink-200/50 text-[11px] mt-4 tracking-wider uppercase animate-pulse select-none">
-                        Click to Flip ✨
+                        <span className="hidden sm:inline">Click to Flip ✨</span>
+                        <span className="inline sm:hidden">Tap to Flip ✨</span>
                       </p>
                     )}
                   </div>
@@ -137,65 +149,6 @@ export default function ReasonsCarousel() {
               </div>
             );
           })}
-
-          {/* Mobile view (Single centered card layout, no side previews) */}
-          <div
-            onClick={() => toggleFlip(currentIndex)}
-            style={{
-              width: "290px",
-              height: "260px",
-              perspective: "1000px",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-            }}
-            className="block sm:hidden"
-          >
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-                transformStyle: "preserve-3d",
-                transform: flipped[currentIndex] ? "rotateY(180deg)" : "rotateY(0deg)",
-                transition: "transform 0.6s ease",
-              }}
-            >
-              {/* Mobile Front */}
-              <div
-                className="absolute inset-0 backface-hidden rounded-2xl flex flex-col items-center justify-center p-5 text-center"
-                style={{
-                  background: "linear-gradient(135deg, rgba(249,168,212,0.15), rgba(196,181,253,0.2))",
-                  border: "1px solid rgba(249,168,212,0.3)",
-                  backdropFilter: "blur(20px)",
-                }}
-              >
-                <div className="w-14 h-14 rounded-full flex items-center justify-center mb-3 text-2xl bg-pink-300/10 border border-pink-300/20">
-                  {REASON_EMOJIS[currentIndex % REASON_EMOJIS.length]}
-                </div>
-                <span className="font-display text-xl font-bold gradient-text mb-1">
-                  Reason #{currentIndex + 1}
-                </span>
-                <p className="text-pink-200/50 text-[10px] mt-2 animate-pulse select-none">
-                  Tap to Reveal ✨
-                </p>
-              </div>
-
-              {/* Mobile Back */}
-              <div
-                className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl flex flex-col items-center justify-center p-5 text-center"
-                style={{
-                  background: "linear-gradient(135deg, rgba(196,181,253,0.2), rgba(249,168,212,0.15))",
-                  border: "1px solid rgba(196,181,253,0.3)",
-                  backdropFilter: "blur(20px)",
-                }}
-              >
-                <div className="text-xl mb-2">💝</div>
-                <p className="text-white text-sm leading-relaxed font-medium">
-                  {reasons[currentIndex].text}
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Navigation controllers */}

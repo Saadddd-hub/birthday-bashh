@@ -30,7 +30,18 @@ export default function BirthdayCake() {
   useEffect(() => {
     setMounted(true);
     const checkLock = () => {
-      const targetTime = new Date(countdownDate).getTime();
+      const parts = countdownDate.match(/\d+/g);
+      if (!parts) {
+        setIsLocked(true);
+        return;
+      }
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      const d = parseInt(parts[2], 10);
+      const h = parts[3] ? parseInt(parts[3], 10) : 0;
+      const mi = parts[4] ? parseInt(parts[4], 10) : 0;
+      const s = parts[5] ? parseInt(parts[5], 10) : 0;
+      const targetTime = new Date(y, m, d, h, mi, s).getTime();
       setIsLocked(Date.now() < targetTime);
     };
 
@@ -332,7 +343,7 @@ export default function BirthdayCake() {
                     </p>
                     <button
                       onClick={resetCake}
-                      className="px-6 py-2.5 rounded-full text-xs font-semibold text-pink-300 border border-pink-400/30 bg-pink-500/10 hover:bg-pink-500/20 btn-hover"
+                      className="px-8 py-3.5 rounded-full text-xs font-semibold text-pink-300 border border-pink-400/30 bg-pink-500/10 hover:bg-pink-500/20 btn-hover"
                       style={{ cursor: "pointer" }}
                       id="reset-candles-btn"
                     >
@@ -342,7 +353,7 @@ export default function BirthdayCake() {
                 ) : (
                   <button
                     onClick={handleBlowAll}
-                    className="px-8 py-3.5 rounded-full font-bold text-white btn-hover text-sm tracking-wide"
+                    className="px-10 py-4.5 rounded-full font-bold text-white btn-hover text-sm tracking-wide"
                     style={{
                       background: "linear-gradient(135deg, #EC4899, #8B5CF6)",
                       boxShadow: "0 4px 15px rgba(236,72,153,0.3)",

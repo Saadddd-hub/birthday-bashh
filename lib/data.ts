@@ -60,7 +60,7 @@ export const timeline: TimelineEvent[] = [
     title: "First Conversation",
     description:
       "We talked for hours and hours, and time just disappeared. Every word you said made me want to know more about you.",
-    image: "/images/timeline/timeline-2.svg",
+    image: "/images/gallery/gallery-6.png",
     emoji: "💬",
   },
   {
@@ -69,7 +69,7 @@ export const timeline: TimelineEvent[] = [
     title: "First Picture Together",
     description:
       "The first time we captured us — a tiny square of proof that this was real and beautiful and ours.",
-    image: "/images/timeline/timeline-3.svg",
+    image: "/images/gallery/gallery-1.jpeg",
     emoji: "📸",
   },
 ];
@@ -78,11 +78,11 @@ export const timeline: TimelineEvent[] = [
 // GALLERY — Photo Collection (Reduced to 5 photo cards)
 // ============================================================
 export const gallery: GalleryPhoto[] = [
-  { id: 1, src: "/images/gallery/gallery-1.svg", alt: "A beautiful moment together", width: 400, height: 400 },
-  { id: 2, src: "/images/gallery/gallery-2.svg", alt: "Laughing and happy", width: 400, height: 500 },
-  { id: 3, src: "/images/gallery/gallery-3.svg", alt: "Stargazing together", width: 400, height: 350 },
-  { id: 4, src: "/images/gallery/gallery-4.svg", alt: "Our favourite place", width: 400, height: 450 },
-  { id: 5, src: "/images/gallery/gallery-5.svg", alt: "A candid moment", width: 400, height: 400 },
+  { id: 1, src: "/images/gallery/gallery-1.jpeg", alt: "A beautiful moment together", width: 400, height: 400 },
+  { id: 2, src: "/images/gallery/gallery-2.jpeg", alt: "Laughing and happy", width: 400, height: 500 },
+  { id: 3, src: "/images/gallery/gallery-3.jpeg", alt: "Stargazing together", width: 400, height: 350 },
+  { id: 4, src: "/images/gallery/gallery-4.jpeg", alt: "Our favourite place", width: 400, height: 450 },
+  { id: 5, src: "/images/gallery/gallery-5.jpeg", alt: "A candid moment", width: 400, height: 400 },
 ];
 
 // ============================================================
@@ -121,29 +121,29 @@ export const reasons: Reason[] = [
 export const gifts: Gift[] = [
   {
     id: 1,
-    title: "A Little Surprise",
+    title: "Mandi Party",
     color: "from-pink-400 to-rose-500",
     ribbonColor: "#fff",
     image: "/images/gifts/gift-1.svg",
-    memory: "Every time I hear our song, I think of you. This is our playlist — songs that tell our story, one note at a time. 🎵",
+    memory: "Get ready for the best Mandi feast ever! A delicious celebration of us. 🍛😋",
     emoji: "🎁",
   },
   {
     id: 2,
-    title: "Open Me",
+    title: "You'll Get Ice Creams",
     color: "from-violet-500 to-purple-700",
     ribbonColor: "#F9A8D4",
     image: "/images/gifts/gift-2.svg",
-    memory: "Do you remember the first time we sat in comfortable silence and it wasn't awkward at all? That's when I knew. 💜",
+    memory: "A sweet treat for a sweet day. You'll get your favorite ice creams! 🍦🍨",
     emoji: "💝",
   },
   {
     id: 3,
-    title: "Something Sweet",
+    title: "Lots of Kisses",
     color: "from-rose-400 to-pink-600",
     ribbonColor: "#C4B5FD",
     image: "/images/gifts/gift-3.svg",
-    memory: "I wrote down every reason you make me smile. I ran out of paper. You are extraordinary. 🌹",
+    memory: "The sweetest gift of all — lots and lots of warm kisses! 😘💋",
     emoji: "🌹",
   },
 ];
@@ -158,8 +158,8 @@ export const countdownDate = "2026-07-08T00:00:00";
 // Add your audio file to public/audio/song.mp3
 // ============================================================
 export const music: Music = {
-  title: "Our Song",
-  artist: "With Love ❤️",
+  title: "Salvatore",
+  artist: "Lana Del Rey",
   src: "/audio/song.mp3",
   cover: "/images/hero/hero-1.svg",
 };

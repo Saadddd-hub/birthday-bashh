@@ -120,7 +120,7 @@ export default function Timeline() {
                 </div>
 
                 {/* Right empty spacer (Desktop only) */}
-                <div className="hidden md:block w-[45%] md:order-2" />
+                <div className={`hidden md:block w-[45%] ${isEven ? "md:order-2" : "md:order-1"}`} />
               </div>
             );
           })}

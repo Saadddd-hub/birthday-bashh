@@ -22,12 +22,11 @@ function GiftCard({
   return (
     <div
       ref={ref}
-      className={`flex justify-center ${inView ? "in-view-fade-up" : ""}`}
+      className={`w-full sm:w-[220px] flex justify-center ${inView ? "in-view-fade-up" : ""}`}
       style={{
         opacity: inView ? 1 : 0,
         animationDelay: `${index * 0.1}s`,
         transition: "opacity 0.6s ease",
-        width: "100%",
       }}
     >
       <button
@@ -86,6 +85,7 @@ function GiftCard({
 
 /**
  * GiftBoxes — Three clickable gift boxes that pop-reveal a memory.
+ * Uses a clean auto-centering flex wrap layout to guarantee perfect symmetry.
  */
 export default function GiftBoxes() {
   const [openGift, setOpenGift] = useState<number | null>(null);
@@ -124,8 +124,8 @@ export default function GiftBoxes() {
           emoji="🎁"
         />
 
-        {/* Symmetric 3-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto justify-center px-4">
+        {/* Auto-centering flex wrap container for perfect horizontal alignment */}
+        <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto px-4">
           {gifts.map((gift, i) => (
             <GiftCard
               key={gift.id}
@@ -201,7 +201,7 @@ export default function GiftBoxes() {
                 </p>
 
                 <button
-                  className="mt-6 px-8 py-3 rounded-xl text-white font-bold transition-all hover:opacity-85 btn-hover"
+                  className="mt-6 px-10 py-4 rounded-xl text-white font-bold transition-all hover:opacity-85 btn-hover"
                   style={{
                     background: "linear-gradient(135deg, #EC4899, #8B5CF6)",
                     cursor: "pointer",
